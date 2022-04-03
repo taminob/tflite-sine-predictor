@@ -15,4 +15,4 @@ jobs:
       - run: pip install -r scripts/requirements.txt
       - run: pip install black pylint
       - run: black --diff --check .
-      - run: pylint --disable=C0114,C0116 scripts/*
+      - run: pylint --disable=C0114,C0116 scripts/*.py

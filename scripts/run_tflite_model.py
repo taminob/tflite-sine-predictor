@@ -15,24 +15,24 @@ def create_interpreter(model_path: str) -> tflite.Interpreter:
 
 def run_model(
     interpreter: tflite.Interpreter,
-    inputs: list[np.ndarray[list[list[np.float32]], np.dtype[np.float32]]] = [
-        np.array([[0.0]], dtype=np.float32)
-    ],
+    inputs: list[np.ndarray[list[list[np.float32]], np.dtype[np.float32]]] = None,
 ) -> list[list[float]]:
+    if inputs is None:
+        inputs = [np.array([[0.0]], dtype=np.float32)]
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
 
     # set input
-    for index in range(len(input_details)):
-        interpreter.set_tensor(input_details[index]["index"], inputs[index])
+    for index, input_detail in enumerate(input_details):
+        interpreter.set_tensor(input_detail["index"], inputs[index])
 
     # run model
     interpreter.invoke()
 
     # get output
     outputs = []
-    for index in range(len(output_details)):
-        outputs.append(interpreter.get_tensor(output_details[index]["index"]))
+    for output_detail in output_details:
+        outputs.append(interpreter.get_tensor(output_detail["index"]))
     return outputs[0]
 
 

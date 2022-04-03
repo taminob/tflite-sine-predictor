@@ -7,8 +7,8 @@ DATASET_SIZE = 250000
 
 
 def _random_sin() -> tuple[float, float]:
-    x = np.random.uniform(-np.pi, np.pi)
-    return (x, np.sin(x))
+    x_value = np.random.uniform(-np.pi, np.pi)
+    return (x_value, np.sin(x_value))
 
 
 def create_dataset(size: int) -> tf.data.Dataset:
@@ -28,9 +28,9 @@ def split_dataset(
 def dataset_into_x_y(dataset: tf.data.Dataset) -> tuple[list[float], list[float]]:
     result_x = []
     result_y = []
-    for x, y in dataset:
-        result_x.append(x)
-        result_y.append(y)
+    for x_value, y_value in dataset:
+        result_x.append(x_value)
+        result_y.append(y_value)
     return (result_x, result_y)
 
 
