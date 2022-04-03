@@ -25,7 +25,9 @@ int main()
 	auto input = interpreter->input_tensor(0);
 	for(auto i : interpreter->inputs())
 		*interpreter->typed_tensor<float>(i) = 0.0;
+
 	interpreter->Invoke();
+
 	for(auto i : interpreter->outputs())
 		std::cout << *interpreter->typed_tensor<float>(i) << std::endl;
 }
