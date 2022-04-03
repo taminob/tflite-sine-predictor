@@ -1,18 +1,18 @@
 #include "tensorflow/lite/interpreter_builder.h"
 #include "tensorflow/lite/model_builder.h"
 #include "tensorflow/lite/kernels/register.h"
+#include "arguments.h"
 #include <iostream>
 #include <memory>
 
-constexpr const char* MODEL_PATH = "../model.tflite";
-
-int main()
+int main(int argc, char* argv[])
 {
-	auto model = tflite::FlatBufferModel::BuildFromFile(MODEL_PATH);
+	auto args = arguments(argc, argv);
+	auto model = tflite::FlatBufferModel::BuildFromFile(args.model_path.c_str());
 	if(model == nullptr)
 	{
-		std::cerr << "Failed to load model (" << MODEL_PATH << ")\n";
-		return -1;
+		std::cerr << "Failed to load model (" << args.model_path << ")\n";
+		return 1;
 	}
 
 	std::unique_ptr<tflite::Interpreter> interpreter;
@@ -22,9 +22,8 @@ int main()
 	if(interpreter->AllocateTensors() != kTfLiteOk)
 		return 3;
 
-	auto input = interpreter->input_tensor(0);
 	for(auto i : interpreter->inputs())
-		*interpreter->typed_tensor<float>(i) = 0.0;
+		*interpreter->typed_tensor<float>(i) = args.input;
 
 	interpreter->Invoke();
 
