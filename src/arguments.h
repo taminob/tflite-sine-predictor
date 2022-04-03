@@ -3,6 +3,7 @@
 
 #include <array>
 #include <iostream>
+#include <string>
 #include <string_view>
 #include <tuple>
 #include <variant>
@@ -47,19 +48,12 @@ struct arguments
 				result = std::stof(s.data(), &converted_chars);
 				is_valid = converted_chars == s.size();
 			}
-			catch(const std::invalid_argument&)
-			{
-				is_valid = false;
-			}
-			catch(const std::out_of_range&)
+			catch(const std::logic_error&)
 			{
 				is_valid = false;
 			}
 			if(!is_valid)
-			{
-				std::cerr << s << " is not a valid floating point number!\n";
-				exit(-1);
-			}
+				throw std::invalid_argument{std::string{s} + " is not a valid floating point number!"};
 			return result;
 		}
 

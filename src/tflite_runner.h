@@ -4,6 +4,9 @@
 #include "tensorflow/lite/interpreter_builder.h"
 #include "tensorflow/lite/model_builder.h"
 #include "tensorflow/lite/kernels/register.h"
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 class tflite_runner
 {
