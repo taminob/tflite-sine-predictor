@@ -10,8 +10,8 @@ int main(int argc, char* argv[])
 		auto runner = tflite_runner(args.model_path);
 		for(auto output : runner.run({args.input}))
 			std::cout << "Input: " << args.input
-				<< "\nOutput: " << output
-				<< "\nActual: " << std::sin(args.input) << std::endl;
+					  << "\nOutput: " << output
+					  << "\nActual: " << std::sin(args.input) << std::endl;
 	}
 	catch(const std::invalid_argument& exc)
 	{
