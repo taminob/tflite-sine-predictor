@@ -1,0 +1,18 @@
+name: Code Analysis
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Black and Pylint
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: pip install --upgrade pip
+      - run: pip install -r scripts/requirements.txt
+      - run: pip install black pylint
+      - run: black --diff --check .
+      - run: pylint --disable=C0114,C0116 scripts/*
