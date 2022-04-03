@@ -15,12 +15,12 @@ public:
 	 model{tflite::FlatBufferModel::BuildFromFile(model_path.data())}
 	{
 		if(model == nullptr)
-			throw std::runtime_error{std::string{"Failed to load model ("} + model_path.data() + ")\n"};
+			throw std::invalid_argument{std::string{"Failed to load model ("} + model_path.data() + ")"};
 		tflite::ops::builtin::BuiltinOpResolver resolver;
 		if(tflite::InterpreterBuilder(*model, resolver)(&interpreter) != kTfLiteOk)
-			throw std::runtime_error{"failed to build interpreter"};
+			throw std::runtime_error{"internal error: failed to build interpreter"};
 		if(interpreter->AllocateTensors() != kTfLiteOk)
-			throw std::runtime_error{"unable to allocate tensors"};
+			throw std::runtime_error{"internal error: unable to allocate tensors"};
 	}
 
 	std::vector<float> run(const std::vector<float>& inputs)
