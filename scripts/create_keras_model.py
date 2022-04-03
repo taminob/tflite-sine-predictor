@@ -15,7 +15,9 @@ def create_dataset(size: int) -> tf.data.Dataset:
     return tf.data.Dataset.from_tensor_slices([_random_sin() for _ in range(size)])
 
 
-def split_dataset(dataset: tf.data.Dataset, validation_split: float=0.2) -> tuple[tf.data.Dataset, tf.data.Dataset]:
+def split_dataset(
+    dataset: tf.data.Dataset, validation_split: float = 0.2
+) -> tuple[tf.data.Dataset, tf.data.Dataset]:
     dataset_size = len(dataset)
     dataset.shuffle(buffer_size=dataset_size)
     train_ds = dataset.skip(int(validation_split * dataset_size))
