@@ -4,9 +4,9 @@
 #include <iostream>
 #include <string>
 
-class arguments;
+struct arguments;
 
-std::ostream& operator<<(std::ostream& os, const arguments&)
+inline std::ostream& operator<<(std::ostream& os, const arguments&)
 {
 	os << "--model, -m\t<string>\tSpecifies the path to the tflite model\n";
 	os << "--input, -i\t<float>\tSpecifies the input value for the model\n";
