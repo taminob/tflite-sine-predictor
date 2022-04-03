@@ -1,4 +1,4 @@
-name: Code Analysis
+name: Python Code Analysis
 
 on: [push]
 
