@@ -14,4 +14,5 @@ add_subdirectory(
   "${CMAKE_CURRENT_BINARY_DIR}/tensorflow-lite" EXCLUDE_FROM_ALL)
 
 add_executable(tflite-sinus-predictor src/main.cpp)
+target_compile_features(tflite-sinus-predictor PRIVATE cxx_std_17)
 target_link_libraries(tflite-sinus-predictor tensorflow-lite)
