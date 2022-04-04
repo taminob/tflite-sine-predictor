@@ -1,4 +1,4 @@
-# Tensorflow Lite Sinus Predictor
+# Tensorflow Lite Sine Predictor
 
 ## Setup C++
 
@@ -34,7 +34,7 @@ python -m pip install -r scripts/requirements.txt
 ## Usage C++
 
 ```shell
-build/tflite-sinus-predictor
+build/tflite-sine-predictor
 ```
 
 ## Usage Python
